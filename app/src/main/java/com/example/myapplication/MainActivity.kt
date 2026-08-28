@@ -1,0 +1,288 @@
+package com.example.myapplication
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.example.myapplication.ui.theme.MyApplicationTheme
+
+data class GameItem(val title: String, val imageResId: Int)
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            MyApplicationTheme {
+                SegundaTela()
+            }
+        }
+    }
+}
+
+@Composable
+fun telaInicial() {
+    val backgroundColor = Color(0xFF13082B)
+
+    Scaffold(
+        containerColor = backgroundColor,
+        bottomBar = { botoesdenavegacao() }
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .verticalScroll(rememberScrollState()),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            TopHeaderSection()
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            BannerSection()
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            titulosJogos(title = "Popular")
+            listaJogos(
+                games = listOf(
+                    GameItem("Resident Evil", R.drawable.residentevil9),
+                    GameItem("Baldur's Gate 3", R.drawable.galdursgate3),
+                    GameItem("Red Dead II", R.drawable.reddead2)
+                )
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            titulosJogos(title = "Para Você")
+            listaJogos(
+                games = listOf(
+                    GameItem("Stardew Valley", R.drawable.stardewvalley),
+                    GameItem("Portal", R.drawable.portal),
+                    GameItem("The Witcher 3", R.drawable.thewitcher3)
+                )
+            )
+
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+    }
+}
+
+
+@Composable
+fun TopHeaderSection() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color(0xFF1B0738))
+            .padding(top = 16.dp, bottom = 12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.logoplaydex),
+                contentDescription = "Logo PlayDex",
+                modifier = Modifier.height(70.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.height(1.dp))
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceAround,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    text = "Games",
+                    color = Color.White,
+                    fontSize = 20.sp,
+                    fontWeight = FontWeight.Bold
+                )
+                Spacer(modifier = Modifier.height(6.dp))
+                Box(
+                    modifier = Modifier
+                        .width(32.dp)
+                        .height(4.dp)
+                        .background(
+                            color = Color(0xFFA855F7),
+                            shape = RoundedCornerShape(50)
+                        )
+                )
+            }
+
+            Text(
+                text = "Feed",
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+
+            Text(
+                text = "News",
+                color = Color.White,
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold
+            )
+        }
+    }
+}
+
+@Composable
+fun BannerSection() {
+    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth(0.9f)
+                .height(180.dp)
+                .clip(RoundedCornerShape(12.dp))
+                .background(Color.DarkGray)
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.telanoticias),
+                contentDescription = "Banner Principal",
+                modifier = Modifier.fillMaxSize(),
+                contentScale = ContentScale.Crop
+            )
+        }
+
+        Row(
+            modifier = Modifier.padding(top = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(6.dp)
+        ) {
+            Box(modifier = Modifier.size(8.dp).background(Color(0xFFA855F7), CircleShape))
+            Box(modifier = Modifier.size(8.dp).background(Color.Gray, CircleShape))
+            Box(modifier = Modifier.size(8.dp).background(Color.Gray, CircleShape))
+            Box(modifier = Modifier.size(8.dp).background(Color.Gray, CircleShape))
+        }
+    }
+}
+
+@Composable
+fun titulosJogos(title: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 20.dp, vertical = 8.dp)
+    ) {
+        Text(
+            text = title,
+            color = Color.White,
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Bold
+        )
+    }
+}
+
+@Composable
+fun listaJogos(games: List<GameItem>) {
+    LazyRow(
+        contentPadding = PaddingValues(horizontal = 20.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        items(games) { game ->
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.width(110.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(110.dp, 150.dp)
+                        .clip(RoundedCornerShape(12.dp))
+                        .background(Color.DarkGray)
+                ) {
+                    Image(
+                        painter = painterResource(id = game.imageResId),
+                        contentDescription = game.title,
+                        modifier = Modifier.fillMaxSize(),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+                Spacer(modifier = Modifier.height(6.dp))
+                Text(
+                    text = game.title,
+                    color = Color.White,
+                    fontSize = 12.sp,
+                    textAlign = TextAlign.Center,
+                    maxLines = 1
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun botoesdenavegacao() {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(65.dp)
+            .background(Color(0xFF1B0C3A))
+            .padding(horizontal = 40.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            painter = painterResource(id = R.drawable.pesquisa),
+            contentDescription = "Logo PlayDex",
+            modifier = Modifier.height(60.dp)
+        )
+        Image(
+            painter = painterResource(id = R.drawable.pladexsemfundo),
+            contentDescription = "Logo PlayDex",
+            modifier = Modifier.height(50.dp)
+        )
+        Image(
+            painter = painterResource(id = R.drawable.user),
+            contentDescription = "Logo PlayDex",
+            modifier = Modifier.height(60.dp)
+        )
+    }
+}
+
+
+@Preview(showBackground = true)
+@Composable
+fun PlayDexPreview() {
+    MyApplicationTheme {
+        telaInicial()
+    }
+}
