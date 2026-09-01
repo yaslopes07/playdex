@@ -36,7 +36,7 @@ fun SegundaTela() {
 
     Scaffold(
         containerColor = backgroundColor,
-        bottomBar = { botoesdenavegacao1() }
+        bottomBar = { botoesdenavegacao2() }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -45,16 +45,23 @@ fun SegundaTela() {
                 .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Spacer(modifier = Modifier.height(16.dp))
-
-            Image(
-                painter = painterResource(R.drawable.logoplaydex),
-                contentDescription = "Logo PlayDex",
+            Box(
                 modifier = Modifier
-                    .width(140.dp)
-                    .height(40.dp),
-                contentScale = ContentScale.Fit
-            )
+                    .fillMaxWidth()
+                    .background(Color(0xFF240047))
+                    .padding(vertical = 12.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.logoplaydex),
+                    contentDescription = "Logo PlayDex",
+                    modifier = Modifier
+                        .width(130.dp)
+                        .height(36.dp),
+                    contentScale = ContentScale.Fit
+                )
+            }
+
             Spacer(modifier = Modifier.height(20.dp))
 
             ProfileHeaderSection()
@@ -201,12 +208,12 @@ fun ProfileGameList(games: List<ProfileGameItem>) {
 }
 
 @Composable
-fun botoesdenavegacao1() {
+fun botoesdenavegacao2() {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(65.dp)
-            .background(Color(0xFF1B0C3A))
+            .background(Color(0xFF240047))
             .padding(horizontal = 40.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically

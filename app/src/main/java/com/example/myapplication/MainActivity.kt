@@ -108,7 +108,7 @@ fun TopHeaderSection() {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color(0xFF1B0738))
+            .background(Color(0xFF240047))
             .padding(top = 16.dp, bottom = 12.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -255,7 +255,7 @@ fun botoesdenavegacao() {
         modifier = Modifier
             .fillMaxWidth()
             .height(65.dp)
-            .background(Color(0xFF1B0C3A))
+            .background(Color(0xFF240047))
             .padding(horizontal = 40.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
