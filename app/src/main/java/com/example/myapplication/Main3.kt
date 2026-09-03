@@ -42,7 +42,11 @@ fun RegistrarReviewTela() {
 
     Scaffold(
         containerColor = backgroundColor,
-        bottomBar = { botoesdenavegacao3() }
+        bottomBar = { botoesdenavegacao3(
+            onPesquisaClick = {},
+            onInicialClick = {},
+            onPerfilClick = {}
+        ) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -256,31 +260,41 @@ fun RegistrarReviewTela() {
 }
 
 @Composable
-fun botoesdenavegacao3() {
+fun botoesdenavegacao3(
+    onPesquisaClick: () -> Unit = {},
+    onInicialClick: () -> Unit = {},
+    onPerfilClick: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(65.dp)
             .background(Color(0xFF240047))
-            .padding(horizontal = 48.dp),
+            .padding(horizontal = 32.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.pesquisa),
-            contentDescription = "Pesquisa",
-            modifier = Modifier.size(32.dp)
-        )
-        Image(
-            painter = painterResource(id = R.drawable.pladexsemfundo),
-            contentDescription = "Home",
-            modifier = Modifier.size(38.dp)
-        )
-        Image(
-            painter = painterResource(id = R.drawable.user),
-            contentDescription = "Perfil",
-            modifier = Modifier.size(32.dp)
-        )
+        IconButton(onClick = onPesquisaClick) {
+            Image(
+                painter = painterResource(id = R.drawable.pesquisa),
+                contentDescription = "Pesquisa",
+                modifier = Modifier.size(32.dp)
+            )
+        }
+        IconButton(onClick = onInicialClick) {
+            Image(
+                painter = painterResource(id = R.drawable.pladexsemfundo),
+                contentDescription = "Home",
+                modifier = Modifier.size(38.dp)
+            )
+        }
+        IconButton(onClick = onPerfilClick) {
+            Image(
+                painter = painterResource(id = R.drawable.user),
+                contentDescription = "Perfil",
+                modifier = Modifier.size(32.dp)
+            )
+        }
     }
 }
 
