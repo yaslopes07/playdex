@@ -24,6 +24,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,13 +43,13 @@ import com.example.myapplication.ui.theme.MyApplicationTheme
 
 data class GameItem(val title: String, val imageResId: Int)
 
-class MainActivity : ComponentActivity() {
+class Main1 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             MyApplicationTheme {
-                SegundaTela()
+                telaInicial()
             }
         }
     }
@@ -60,7 +61,11 @@ fun telaInicial() {
 
     Scaffold(
         containerColor = backgroundColor,
-        bottomBar = { botoesdenavegacao() }
+        bottomBar = { botoesdenavegacao(
+            onPesquisaClick = {},
+            onInicialClick = {},
+            onPerfilClick = {}
+        ) }
     ) { innerPadding ->
         Column(
             modifier = Modifier
@@ -188,10 +193,18 @@ fun BannerSection() {
             modifier = Modifier.padding(top = 8.dp),
             horizontalArrangement = Arrangement.spacedBy(6.dp)
         ) {
-            Box(modifier = Modifier.size(8.dp).background(Color(0xFFA855F7), CircleShape))
-            Box(modifier = Modifier.size(8.dp).background(Color.Gray, CircleShape))
-            Box(modifier = Modifier.size(8.dp).background(Color.Gray, CircleShape))
-            Box(modifier = Modifier.size(8.dp).background(Color.Gray, CircleShape))
+            Box(modifier = Modifier
+                .size(8.dp)
+                .background(Color(0xFFA855F7), CircleShape))
+            Box(modifier = Modifier
+                .size(8.dp)
+                .background(Color.Gray, CircleShape))
+            Box(modifier = Modifier
+                .size(8.dp)
+                .background(Color.Gray, CircleShape))
+            Box(modifier = Modifier
+                .size(8.dp)
+                .background(Color.Gray, CircleShape))
         }
     }
 }
@@ -250,31 +263,41 @@ fun listaJogos(games: List<GameItem>) {
 }
 
 @Composable
-fun botoesdenavegacao() {
+fun botoesdenavegacao(
+    onPesquisaClick: () -> Unit = {},
+    onInicialClick: () -> Unit = {},
+    onPerfilClick: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(65.dp)
             .background(Color(0xFF240047))
-            .padding(horizontal = 40.dp),
+            .padding(horizontal = 32.dp),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.pesquisa),
-            contentDescription = "Logo PlayDex",
-            modifier = Modifier.height(60.dp)
-        )
-        Image(
-            painter = painterResource(id = R.drawable.pladexsemfundo),
-            contentDescription = "Logo PlayDex",
-            modifier = Modifier.height(50.dp)
-        )
-        Image(
-            painter = painterResource(id = R.drawable.user),
-            contentDescription = "Logo PlayDex",
-            modifier = Modifier.height(60.dp)
-        )
+        IconButton(onClick = onPesquisaClick) {
+            Image(
+                painter = painterResource(id = R.drawable.pesquisa),
+                contentDescription = "Pesquisa",
+                modifier = Modifier.size(32.dp)
+            )
+        }
+        IconButton(onClick = onInicialClick) {
+            Image(
+                painter = painterResource(id = R.drawable.pladexsemfundo),
+                contentDescription = "Home",
+                modifier = Modifier.size(38.dp)
+            )
+        }
+        IconButton(onClick = onPerfilClick) {
+            Image(
+                painter = painterResource(id = R.drawable.user),
+                contentDescription = "Perfil",
+                modifier = Modifier.size(32.dp)
+            )
+        }
     }
 }
 
