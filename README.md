@@ -8,7 +8,7 @@ O **PlayDex** é uma plataforma desenvolvida para centralizar a biblioteca de jo
 
 ## 📌 Sobre o Projeto
 
-Este projeto foi desenvolvido como parte da disciplina de Design de Interface / Engenharia de Software. O objetivo principal é criar uma solução intuitiva que resolve a dispersão do histórico de jogos e fomenta a comunidade gamer através da troca de experiências.
+Este projeto foi desenvolvido como parte da disciplina de Desenvolvimento de Aplicativos Móveis (Android). O objetivo principal é criar uma solução intuitiva que resolve a dispersão do histórico de jogos e fomenta a comunidade gamer através da troca de experiências.
 
 ### 🎯 Público-Alvo
 * **Gamers Multiplataforma** que jogam em mais de um console/PC.
@@ -29,4 +29,5 @@ Este projeto foi desenvolvido como parte da disciplina de Design de Interface / 
 
 ## 👥 Equipe de Desenvolvimento
 
-* **[Ana Julia Nicolack e Yasmin da Rocha Lopes]** 
+* **[Ana Julia Nicolack]**
+* **[Yasmin da Rocha Lopes]** 
